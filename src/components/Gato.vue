@@ -93,6 +93,7 @@ export default {
     },
     insertToga() {
       const path = "http://127.0.0.1:8000/rest/gatos/";
+
       axios
         .post(path, {
           nombre: this.nombre,
