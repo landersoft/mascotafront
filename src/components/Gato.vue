@@ -39,7 +39,7 @@
 
     <button type="button" class="btn btn-success" @click="insertToga">Insertar</button>
 
-    <button type="button" class="btn btn-primary" @click="getTogas">Cargar</button>
+    <button type="button" class="btn btn-primary ml-1" @click="getTogas">Cargar</button>
     <table class="table">
       <thead>
         <tr>
@@ -58,8 +58,8 @@
           <td>{{item.raza}}</td>
           <td>{{item.sexo}}</td>
           <td>
-            <button class="btn btn-warning">editar</button>
-            <button class="btn btn-danger">eliminar</button>
+            <button class="btn btn-warning mr-1">editar</button>
+            <button class="btn btn-danger" @click="deleteToga(item)">eliminar</button>
           </td>
         </tr>
       </tbody>
@@ -80,7 +80,8 @@ export default {
 
       nombre: "",
       raza: "",
-      sexo: "F"
+      sexo: "F",
+      id: ""
     };
   },
   methods: {
@@ -99,11 +100,19 @@ export default {
           sexo: this.sexo
         })
         .then(response => {
-          console.log(response);
+          console.log(response.data);
           (this.nombre = ""), (this.raza = "");
           this.getTogas();
         })
         .catch(error => console.log(error));
+    },
+    deleteToga(item) {
+      axios
+        .delete("http://127.0.0.1:8000/rest/gatos/" + item.id)
+        .then(response => {
+          console.log(response.data);
+          this.getTogas();
+        });
     }
   }
 };
