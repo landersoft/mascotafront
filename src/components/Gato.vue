@@ -84,6 +84,9 @@ export default {
       id: ""
     };
   },
+  mounted(){
+    this.getTogas()
+  },
   methods: {
     getTogas() {
       axios
